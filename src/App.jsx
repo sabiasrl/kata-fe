@@ -1,8 +1,8 @@
 import React, { useReducer, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
-import BookList from './BookList';
+import BookList from './components/BookList';
 import Cart from './Cart';
-import Checkout from './Checkout';
+import Checkout from './components/Checkout';
 import { CartContext, cartReducer } from './CartContext';
 import { fetchBooks } from './services/api';
 import './App.css';
@@ -49,11 +49,11 @@ function AppContent() {
         <Route
           path="/"
           element={
-            <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
+            <div className="flex-layout">
               <div style={{ flex: 2 }}>
                 {loading ? <p>Loading books...</p> : <BookList books={books} onAddToCart={addToCart} />}
               </div>
-              <div style={{ flex: 1, border: '1px solid #eee', padding: '1rem', borderRadius: '8px', background: '#fafafa' }}>
+              <div className="cart-summary" style={{ flex: 1, minWidth: 320, marginLeft: 24 }}>
                 <Cart cartItems={cart} onUpdateQuantity={updateQuantity} onRemove={removeFromCart} />
                 {cart.length > 0 && (
                   <button style={{ marginTop: '1rem', width: '100%' }} onClick={() => navigate('/checkout')}>

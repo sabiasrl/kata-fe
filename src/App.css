@@ -1,42 +1,116 @@
+body {
+  background: #f5f5f5;
+  font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+  margin: 0;
+  color: #222;
+}
+
 #root {
-  max-width: 1280px;
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 2rem 1rem;
+  text-align: left;
+}
+
+nav {
+  background: #fff;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  font-size: 1.1rem;
+}
+
+h1, h2 {
+  font-weight: 600;
+  color: #232f3e;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+button {
+  background: #ffd814;
+  color: #111;
+  border: 1px solid #fcd200;
+  border-radius: 6px;
+  padding: 0.5em 1.2em;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+button:hover {
+  background: #f7ca00;
+}
+
+input[type="text"], input[type="password"], input[type="number"] {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.5em;
+  font-size: 1rem;
+  width: 100%;
+  margin-top: 0.2em;
+  margin-bottom: 0.5em;
+  box-sizing: border-box;
+}
+
+/* Book list and cart summary layout */
+.flex-layout {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.book-list {
+  flex: 2;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   padding: 2rem;
-  text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.cart-summary {
+  flex: 1;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 2rem 1.5rem;
+  min-width: 320px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.cart-summary button {
+  width: 100%;
+  margin-top: 1rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+li {
+  border-bottom: 1px solid #eee;
+  padding: 1rem 0;
+}
+li:last-child {
+  border-bottom: none;
 }
 
-.card {
-  padding: 2em;
+/* Auth form */
+.auth-form {
+  max-width: 400px;
+  margin: 2rem auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  padding: 2rem;
+}
+.auth-form label {
+  font-weight: 500;
+  margin-bottom: 0.2em;
+  display: block;
+}
+.auth-form button {
+  margin-top: 1rem;
 }
 
-.read-the-docs {
-  color: #888;
-}
+/* ...existing code... */
