@@ -6,7 +6,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
+import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 import Paper from '@mui/material/Paper';
 
 function NumberInput({ value, onChange, min = 1 }) {
@@ -49,8 +49,8 @@ const Cart = ({ cartItems, onUpdateQuantity, onRemove }) => (
                 <Typography variant="body2" color="text.secondary">by {item.book.author}</Typography>
                 <Typography variant="body2" color="primary.main">Price: ${item.book.price.toFixed(2)}</Typography>
               </Stack>
-              <IconButton size="small" color="error" onClick={() => onRemove(item.book.id)} aria-label="Remove">
-                <CloseIcon fontSize="small" />
+              <IconButton size="medium" color="error" onClick={() => onRemove(item.book.id)} aria-label="Remove" sx={{ ml: 2 }}>
+                <DeleteSweepIcon fontSize="medium" />
               </IconButton>
             </Stack>
             <Stack direction="row" alignItems="center" spacing={1} sx={{ mt: 1 }}>

@@ -7,6 +7,7 @@ import LinkMUI from '@mui/material/Link';
 const breadcrumbMap = {
   '/': 'Home',
   '/products': 'Products',
+  '/products/checkout': 'Checkout',
   '/checkout': 'Checkout',
   '/login': 'Login',
   '/register': 'Register',

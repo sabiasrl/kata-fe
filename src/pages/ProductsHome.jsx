@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import BookList from '../components/BookList';
 import Cart from '../components/Cart';
-import { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
 import { fetchBooks } from '../services/api';
 import Box from '@mui/material/Box';
@@ -24,7 +23,7 @@ const ProductsHome = ({ onAddToCart, onUpdateQuantity, onRemove, navigate }) => 
       <Box sx={{ flex: 1, minWidth: 320 }}>
         <Cart cartItems={cartItems} onUpdateQuantity={onUpdateQuantity} onRemove={onRemove} />
         {cartItems.length > 0 && (
-          <Button variant="contained" color="primary" fullWidth onClick={() => navigate('/checkout')}>
+          <Button variant="contained" color="primary" fullWidth onClick={() => navigate('/products/checkout')}>
             Proceed to Checkout
           </Button>
         )}

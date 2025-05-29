@@ -169,7 +169,7 @@ function AppContent() {
           <Route path="/products" element={
             <ProductsHome onAddToCart={addToCart} onUpdateQuantity={updateQuantity} onRemove={removeFromCart} navigate={navigate}/>
           } />
-          <Route path="/checkout" element={
+          <Route path="/products/checkout" element={
             <Checkout
               cartItems={cart}
               onCheckout={() => {
