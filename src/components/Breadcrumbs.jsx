@@ -3,8 +3,10 @@ import { Link, useLocation } from 'react-router-dom';
 
 const breadcrumbMap = {
   '/': 'Home',
+  '/products': 'Products',
   '/checkout': 'Checkout',
   '/login': 'Login',
+  '/register': 'Register',
 };
 
 function Breadcrumbs() {

@@ -1,8 +1,5 @@
 import React, { useReducer, useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
-import BookList from './components/BookList';
-import Cart from './components/Cart';
-import Checkout from './components/Checkout';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import { CartContext, cartReducer } from './context/CartContext';
 import { fetchBooks } from './services/api';
 import './App.css';
@@ -10,6 +7,12 @@ import Breadcrumbs from './components/Breadcrumbs';
 import LoginPage from './pages/LoginPage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
 import AuthButtons from './components/AuthButtons';
+import HomePage from './pages/HomePage.jsx';
+import BookList from './components/BookList';
+import Cart from './components/Cart';
+import Checkout from './components/Checkout';
+import InfoPage from './pages/InfoPage.jsx';
+import ProductsHome from './pages/ProductsHome.jsx';
 
 function Header() {
   return (
@@ -39,14 +42,9 @@ function Header() {
 
 function AppContent() {
   const [cart, dispatch] = useReducer(cartReducer, []);
-  const [books, setBooks] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchBooks().then(setBooks).catch(() => setBooks([])).finally(() => setLoading(false));
-  }, []);
 
   const addToCart = (book) => dispatch({ type: 'ADD_TO_CART', book });
   const updateQuantity = (bookId, quantity) => dispatch({ type: 'UPDATE_QUANTITY', bookId, quantity });
@@ -57,43 +55,27 @@ function AppContent() {
   return (
     <CartContext.Provider value={{ cartItems: cart, addToCart, updateQuantity, removeFromCart, clearCart }}>
       <Header />
-      <div style={{ maxWidth: 1200, margin: '0 auto', background: '#fff', borderRadius: 12, boxShadow: '0 2px 12px rgba(0,0,0,0.07)', padding: '2rem 2.5rem 2.5rem 2.5rem' }}>
+      <div className="main-card">
         <AuthButtons user={user} onLogout={handleLogout} />
         <Breadcrumbs />
         <Routes>
-          <Route
-            path="/"
-            element={
-              <div className="flex-layout">
-                <div style={{ flex: 2 }}>
-                  {loading ? <p>Loading books...</p> : <BookList books={books} onAddToCart={addToCart} />}
-                </div>
-                <div className="cart-summary" style={{ flex: 1, minWidth: 320, marginLeft: 24 }}>
-                  <Cart cartItems={cart} onUpdateQuantity={updateQuantity} onRemove={removeFromCart} />
-                  {cart.length > 0 && (
-                    <button style={{ marginTop: '1rem', width: '100%' }} onClick={() => navigate('/checkout')}>
-                      Proceed to Checkout
-                    </button>
-                  )}
-                </div>
-              </div>
-            }
-          />
-          <Route
-            path="/checkout"
-            element={
-              <Checkout
-                cartItems={cart}
-                onCheckout={() => {
-                  clearCart();
-                  navigate('/');
-                  alert('Order placed!');
-                }}
-              />
-            }
-          />
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/products" element={
+            <ProductsHome onAddToCart={addToCart} onUpdateQuantity={updateQuantity} onRemove={removeFromCart} navigate={navigate}/>
+          } />
+          <Route path="/checkout" element={
+            <Checkout
+              cartItems={cart}
+              onCheckout={() => {
+                clearCart();
+                navigate('/');
+                alert('Order placed!');
+              }}
+            />
+          } />
+          <Route path="/info" element={<InfoPage />} />
         </Routes>
       </div>
     </CartContext.Provider>

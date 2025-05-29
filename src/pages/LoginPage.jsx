@@ -13,8 +13,9 @@ const LoginPage = () => {
     setError('');
     try {
       await login({ username, password });
-      navigate('/');
+      navigate('/products');
     } catch (err) {
+        console.log(err);
       setError('Invalid credentials');
     }
   };
