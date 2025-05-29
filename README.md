@@ -23,7 +23,7 @@ npm install
 ```bash
 npm run dev
 ```
-The app will be available at `http://localhost:5173` (default Vite port).
+The app will be available at `http://localhost:3000` (default Vite port).
 
 ### Run Tests
 ```bash
@@ -33,10 +33,3 @@ npm test
 ### API Integration
 - The frontend expects the backend API to be running at `http://localhost:8080`.
 - Update API URLs in the code if your backend runs elsewhere.
-
-### TDD
-- Write tests before implementing features.
-
----
-
-See the backend/README.md for running the Spring Boot API.
