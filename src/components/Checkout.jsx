@@ -7,7 +7,7 @@ const Checkout = ({ cartItems, onCheckout }) => {
   );
 
   return (
-    <div className="cart-summary" style={{ maxWidth: 500, margin: '2rem auto' }}>
+    <div className="main-card" style={{ width: '100%', maxWidth: '100%', margin: '2rem auto' }}>
       <h2 style={{ textAlign: 'center', marginBottom: 24 }}>Checkout</h2>
       {cartItems.length === 0 ? (
         <p style={{ textAlign: 'center', color: '#888' }}>Your cart is empty.</p>

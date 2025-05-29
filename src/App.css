@@ -15,7 +15,7 @@ body {
   flex-direction: column;
 }
 
-nav {
+nav, .breadcrumb-nav {
   background: #fff;
   padding: 1rem 2rem;
   border-radius: 8px;
@@ -24,9 +24,28 @@ nav {
   font-size: 1.1rem;
 }
 
+nav a, .breadcrumb-nav a, a {
+  color: #0078d4;
+  text-decoration: underline;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+nav a:hover, .breadcrumb-nav a:hover, a:hover {
+  color: #005a9e;
+}
+
+nav span[style*="color: #888"], .breadcrumb-nav span[style*="color: #888"] {
+  color: #0078d4 !important;
+  font-weight: 600;
+}
+
 h1, h2 {
   font-weight: 600;
-  color: #232f3e;
+  color: #0078d4;
+}
+
+.main-card h1, .main-card h2 {
+  color: #0078d4;
 }
 
 ul {
