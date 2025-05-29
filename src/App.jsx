@@ -48,30 +48,40 @@ function Footer() {
       width: '100%',
       background: 'linear-gradient(90deg, #f4f8fb 0%, #e0f7fa 100%)',
       color: '#222',
-      textAlign: 'center',
       padding: '2.5rem 0 1.5rem 0',
       marginTop: '2rem',
       borderTop: '1px solid #e0e0e0',
       fontSize: '1.08rem',
       display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      gap: '0.7rem',
+      flexDirection: 'row',
+      justifyContent: 'center',
+      gap: '3rem',
+      flexWrap: 'wrap',
       boxShadow: '0 -2px 12px rgba(0,120,212,0.04)',
     }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12, fontWeight: 600, fontSize: '1.15rem' }}>
-        <img src="/vite.svg" alt="Logo" style={{ width: 32, height: 32, borderRadius: '50%', boxShadow: '0 1px 4px #0078d4' }} />
-        <span>Daniele Sabia</span>
+      <div style={{ minWidth: 220, textAlign: 'left' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, fontWeight: 600, fontSize: '1.15rem', marginBottom: 8 }}>
+          <img src="/vite.svg" alt="Logo" style={{ width: 32, height: 32, borderRadius: '50%', boxShadow: '0 1px 4px #0078d4' }} />
+          <span>Daniele Sabia</span>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
+          <svg width="20" height="20" fill="#0078d4" style={{ marginRight: 4 }} viewBox="0 0 24 24"><path d="M12 12.713l11.985-8.713h-23.97zm0 2.574l-12-8.713v13.426h24v-13.426zm12-11.287v-.001c0-1.104-.896-2-2-2h-20c-1.104 0-2 .896-2 2v.001l12 8.713 12-8.713z"/></svg>
+          <a href="mailto:sabiasrl@outlook.com" style={{ color: '#0078d4', textDecoration: 'underline' }}>sabiasrl@outlook.com</a>
+        </div>
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-        <svg width="20" height="20" fill="#0078d4" style={{ marginRight: 4 }} viewBox="0 0 24 24"><path d="M12 12.713l11.985-8.713h-23.97zm0 2.574l-12-8.713v13.426h24v-13.426zm12-11.287v-.001c0-1.104-.896-2-2-2h-20c-1.104 0-2 .896-2 2v.001l12 8.713 12-8.713z"/></svg>
-        <a href="mailto:sabiasrl@outlook.com" style={{ color: '#0078d4', textDecoration: 'underline' }}>sabiasrl@outlook.com</a>
-      </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-        <svg width="20" height="20" fill="#0078d4" style={{ marginRight: 4 }} viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-7 19h-3v-8h3v8zm-1.5-9.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 9.268c0 1.654-1.346 3-3 3h-14c-1.654 0-3-1.346-3-3v-14c0-1.654 1.346-3 3-3h14c1.654 0 3 1.346 3 3v14zm-6-1h-3v-4c0-1.104-.896-2-2-2s-2 .896-2 2v4h-3v-8h3v1.268c.591-.348 1.27-.568 2-.568s1.409.22 2 .568v-1.268h3v8z"/></svg>
-        <a href="https://www.linkedin.com/in/daniele-sabia" target="_blank" rel="noopener noreferrer" style={{ color: '#0078d4', textDecoration: 'underline' }}>
-          LinkedIn: daniele-sabia
-        </a>
+      <div style={{ minWidth: 220, textAlign: 'left', display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <svg width="20" height="20" fill="#0078d4" style={{ marginRight: 4 }} viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-7 19h-3v-8h3v8zm-1.5-9.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 9.268c0 1.654-1.346 3-3 3h-14c-1.654 0-3-1.346-3-3v-14c0-1.654 1.346-3 3-3h14c1.654 0 3 1.346 3 3v14zm-6-1h-3v-4c0-1.104-.896-2-2-2s-2 .896-2 2v4h-3v-8h3v1.268c.591-.348 1.27-.568 2-.568s1.409.22 2 .568v-1.268h3v8z"/></svg>
+          <a href="https://www.linkedin.com/in/daniele-sabia" target="_blank" rel="noopener noreferrer" style={{ color: '#0078d4', textDecoration: 'underline' }}>
+            LinkedIn: daniele-sabia
+          </a>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <svg width="20" height="20" fill="#0078d4" style={{ marginRight: 4 }} viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8zm0-14a6 6 0 100 12 6 6 0 000-12zm0 10a4 4 0 110-8 4 4 0 010 8z"/></svg>
+          <a href="https://sabiasrl.com" target="_blank" rel="noopener noreferrer" style={{ color: '#0078d4', textDecoration: 'underline' }}>
+            Company: sabiasrl.com
+          </a>
+        </div>
       </div>
     </footer>
   );
