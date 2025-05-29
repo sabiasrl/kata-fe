@@ -128,10 +128,21 @@ li:last-child {
   min-height: 70vh;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
 @media (max-width: 900px) {
   .main-card {
     padding: 1rem;
+    max-width: 98vw;
+  }
+}
+
+@media (max-width: 600px) {
+  .main-card {
+    padding: 0.5rem;
+    max-width: 100vw;
+    border-radius: 0;
+    min-height: unset;
   }
 }

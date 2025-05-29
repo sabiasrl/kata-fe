@@ -21,8 +21,8 @@ const LoginPage = () => {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: '2rem auto', padding: 24, border: '1px solid #eee', borderRadius: 8 }}>
-      <h2>Login</h2>
+    <div className="main-card" style={{ maxWidth: 400, margin: '2rem auto' }}>
+      <h2 style={{ textAlign: 'center', marginBottom: 24 }}>Login</h2>
       <form onSubmit={handleSubmit}>
         <div style={{ marginBottom: 12 }}>
           <label>Username</label>
@@ -47,6 +47,10 @@ const LoginPage = () => {
         {error && <div style={{ color: 'red', marginBottom: 12 }}>{error}</div>}
         <button type="submit" style={{ width: '100%' }}>Login</button>
       </form>
+      <div style={{ marginTop: 16, textAlign: 'center' }}>
+        Don't have an account?{' '}
+        <a href="/register" style={{ color: '#0078d4', textDecoration: 'underline' }}>Register</a>
+      </div>
     </div>
   );
 };

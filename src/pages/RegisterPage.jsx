@@ -23,8 +23,8 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="auth-form">
-      <h2>Register</h2>
+    <div className="main-card" style={{ maxWidth: 400, margin: '2rem auto' }}>
+      <h2 style={{ textAlign: 'center', marginBottom: 24 }}>Register</h2>
       <form onSubmit={handleSubmit}>
         <label>Username</label>
         <input
@@ -42,10 +42,11 @@ const RegisterPage = () => {
         />
         {error && <div style={{ color: 'red', marginBottom: 12 }}>{error}</div>}
         {success && <div style={{ color: 'green', marginBottom: 12 }}>{success}</div>}
-        <button type="submit">Register</button>
+        <button type="submit" style={{ width: '100%' }}>Register</button>
       </form>
-      <div style={{ marginTop: 16 }}>
-        Already have an account? <a href="/login">Login</a>
+      <div style={{ marginTop: 16, textAlign: 'center' }}>
+        Already have an account?{' '}
+        <a href="/login" style={{ color: '#0078d4', textDecoration: 'underline' }}>Login</a>
       </div>
     </div>
   );
