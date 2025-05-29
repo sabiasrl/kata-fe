@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { login } from '../services/api';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Alert from '@mui/material/Alert';
+import LinkMUI from '@mui/material/Link';
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
@@ -14,44 +20,42 @@ const LoginPage = () => {
     try {
       await login({ username, password });
       navigate('/products');
-    } catch (err) {
-        console.log(err);
+    } catch {
       setError('Invalid credentials');
     }
   };
 
   return (
-    <div className="main-card" style={{ maxWidth: 400, margin: '2rem auto' }}>
-      <h2 style={{ textAlign: 'center', marginBottom: 24 }}>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: 12 }}>
-          <label>Username</label>
-          <input
-            type="text"
-            value={username}
-            onChange={e => setUsername(e.target.value)}
-            required
-            style={{ width: '100%' }}
-          />
-        </div>
-        <div style={{ marginBottom: 12 }}>
-          <label>Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            required
-            style={{ width: '100%' }}
-          />
-        </div>
-        {error && <div style={{ color: 'red', marginBottom: 12 }}>{error}</div>}
-        <button type="submit" style={{ width: '100%' }}>Login</button>
-      </form>
-      <div style={{ marginTop: 16, textAlign: 'center' }}>
+    <Box sx={{ bgcolor: 'background.paper', borderRadius: 2, p: { xs: 1, md: 3 }, maxWidth: 400, mx: 'auto', my: 4 }}>
+      <Typography variant="h5" align="center" color="secondary.main" fontWeight={700} gutterBottom>Login</Typography>
+      <Box component="form" onSubmit={handleSubmit}>
+        <TextField
+          label="Username"
+          value={username}
+          onChange={e => setUsername(e.target.value)}
+          required
+          fullWidth
+          margin="normal"
+        />
+        <TextField
+          label="Password"
+          type="password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          required
+          fullWidth
+          margin="normal"
+        />
+        {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
+        <Button type="submit" fullWidth variant="contained" color="primary" sx={{ mt: 1 }}>
+          Login
+        </Button>
+      </Box>
+      <Typography sx={{ mt: 2 }} align="center">
         Don't have an account?{' '}
-        <a href="/register" style={{ color: '#0078d4', textDecoration: 'underline' }}>Register</a>
-      </div>
-    </div>
+        <LinkMUI component={Link} to="/register" color="primary.main">Register</LinkMUI>
+      </Typography>
+    </Box>
   );
 };
 

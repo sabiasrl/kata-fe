@@ -1,10 +1,11 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import Box from '@mui/material/Box';
 
 const AuthLayout = () => (
-  <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+  <Box sx={{ bgcolor: 'background.paper', borderRadius: 2, p: { xs: 1, md: 3 }, minHeight: '60vh' }}>
     <Outlet />
-  </div>
+  </Box>
 );
 
 export default AuthLayout;

@@ -1,29 +1,28 @@
 import React from 'react';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 
 const AuthButtons = ({ user, onLogout }) => {
   if (user) {
     return (
-      <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-        <span style={{ fontWeight: 500, color: '#0078d4' }}>Hello, {user.username}</span>
-        <button style={{ background: '#fff', color: '#0078d4', border: '1px solid #0078d4', fontWeight: 600 }} onClick={onLogout}>
+      <Stack direction="row" justifyContent="flex-end" alignItems="center" spacing={2}>
+        <Typography fontWeight={500} color="primary.main">Hello, {user.username}</Typography>
+        <Button variant="outlined" color="primary" onClick={onLogout}>
           Logout
-        </button>
-      </div>
+        </Button>
+      </Stack>
     );
   }
   return (
-    <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', marginBottom: '1.5rem' }}>
-      <a href="/login">
-        <button style={{ background: '#fff', color: '#0078d4', border: '1px solid #0078d4', fontWeight: 600 }}>
-          Login
-        </button>
-      </a>
-      <a href="/register">
-        <button style={{ background: '#0078d4', color: '#fff', border: '1px solid #0078d4', fontWeight: 600 }}>
-          Register
-        </button>
-      </a>
-    </div>
+    <Stack direction="row" justifyContent="flex-end" spacing={2}>
+      <Button component="a" href="/login" variant="outlined" color="primary">
+        Login
+      </Button>
+      <Button component="a" href="/register" variant="contained" color="primary">
+        Register
+      </Button>
+    </Stack>
   );
 };
 

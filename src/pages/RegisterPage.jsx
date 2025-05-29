@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { register } from '../services/api';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Alert from '@mui/material/Alert';
+import LinkMUI from '@mui/material/Link';
 
 const RegisterPage = () => {
   const [username, setUsername] = useState('');
@@ -17,38 +23,43 @@ const RegisterPage = () => {
       await register({ username, password });
       setSuccess('Registration successful! You can now log in.');
       setTimeout(() => navigate('/login'), 1200);
-    } catch (err) {
+    } catch {
       setError('Registration failed. Try a different username.');
     }
   };
 
   return (
-    <div className="main-card" style={{ maxWidth: 400, margin: '2rem auto' }}>
-      <h2 style={{ textAlign: 'center', marginBottom: 24 }}>Register</h2>
-      <form onSubmit={handleSubmit}>
-        <label>Username</label>
-        <input
-          type="text"
+    <Box sx={{ bgcolor: 'background.paper', borderRadius: 2, p: { xs: 1, md: 3 }, maxWidth: 400, mx: 'auto', my: 4 }}>
+      <Typography variant="h5" align="center" color="secondary.main" fontWeight={700} gutterBottom>Register</Typography>
+      <Box component="form" onSubmit={handleSubmit}>
+        <TextField
+          label="Username"
           value={username}
           onChange={e => setUsername(e.target.value)}
           required
+          fullWidth
+          margin="normal"
         />
-        <label>Password</label>
-        <input
+        <TextField
+          label="Password"
           type="password"
           value={password}
           onChange={e => setPassword(e.target.value)}
           required
+          fullWidth
+          margin="normal"
         />
-        {error && <div style={{ color: 'red', marginBottom: 12 }}>{error}</div>}
-        {success && <div style={{ color: 'green', marginBottom: 12 }}>{success}</div>}
-        <button type="submit" style={{ width: '100%' }}>Register</button>
-      </form>
-      <div style={{ marginTop: 16, textAlign: 'center' }}>
+        {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
+        {success && <Alert severity="success" sx={{ mb: 2 }}>{success}</Alert>}
+        <Button type="submit" fullWidth variant="contained" color="primary" sx={{ mt: 1 }}>
+          Register
+        </Button>
+      </Box>
+      <Typography sx={{ mt: 2 }} align="center">
         Already have an account?{' '}
-        <a href="/login" style={{ color: '#0078d4', textDecoration: 'underline' }}>Login</a>
-      </div>
-    </div>
+        <LinkMUI component={Link} to="/login" color="primary.main">Login</LinkMUI>
+      </Typography>
+    </Box>
   );
 };
 

@@ -1,8 +1,6 @@
-import React, { useReducer, useEffect, useState } from 'react';
+import React, { useReducer, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import { CartContext, cartReducer } from './context/CartContext';
-import { fetchBooks } from './services/api';
-import './App.css';
 import Breadcrumbs from './components/Breadcrumbs';
 import LoginPage from './pages/LoginPage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
@@ -13,77 +11,136 @@ import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import InfoPage from './pages/InfoPage.jsx';
 import ProductsHome from './pages/ProductsHome.jsx';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+
+const theme = createTheme({
+  palette: {
+    mode: 'light',
+    primary: {
+      main: '#ff6f00', // Amazon orange
+    },
+    secondary: {
+      main: '#232f3e', // Amazon dark blue
+    },
+    background: {
+      default: '#f3f3f3',
+      paper: '#fff',
+    },
+    error: {
+      main: '#b12704',
+    },
+  },
+  typography: {
+    fontFamily: 'Amazon Ember, Arial, sans-serif',
+    h3: {
+      fontWeight: 700,
+      fontSize: '2.2rem',
+      color: '#232f3e',
+    },
+    h5: {
+      fontWeight: 600,
+      color: '#232f3e',
+    },
+    subtitle1: {
+      color: '#555',
+    },
+    body1: {
+      color: '#232f3e',
+    },
+  },
+  components: {
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          background: 'linear-gradient(90deg, #ff9900 0%, #ff6f00 100%)',
+          boxShadow: '0 2px 8px rgba(35,47,62,0.08)',
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          borderRadius: 12,
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 8,
+          fontWeight: 600,
+          textTransform: 'none',
+        },
+        containedPrimary: {
+          backgroundColor: '#ff9900',
+          color: '#232f3e',
+          '&:hover': {
+            backgroundColor: '#ff6f00',
+          },
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          background: '#fff',
+        },
+      },
+    },
+  },
+});
 
 function Header() {
   return (
-    <header style={{
-      background: 'linear-gradient(90deg, #0078d4 0%, #00b4d8 100%)',
-      color: '#fff',
-      padding: '2rem 0 1rem 0',
-      textAlign: 'center',
-      boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-      marginBottom: '2rem',
-    }}>
-      <h1 style={{
-        fontSize: '2.5rem',
-        fontWeight: 700,
-        letterSpacing: '0.02em',
-        margin: 0,
-        fontFamily: 'Segoe UI, Arial, sans-serif',
-        color: '#00b4d8', // Brighter blue for the title
-        textShadow: '0 2px 8px rgba(0,120,212,0.10)',
-      }}>
-        Kata Online Bookstore
-      </h1>
-      <p style={{ fontSize: '1.2rem', fontWeight: 400, margin: '0.5rem 0 0 0', color: '#e6e6e6' }}>
-        Discover, shop, and enjoy your next read
-      </p>
-    </header>
+    <AppBar position="static" elevation={1}>
+      <Toolbar sx={{ flexDirection: 'column', alignItems: 'center', py: 2 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+          <img src="/vite.svg" alt="Logo" style={{ width: 40, height: 40, borderRadius: '50%' }} />
+          <Typography variant="h3" sx={{ color: 'secondary.main', fontWeight: 700 }}>
+            Kata Online Bookstore
+          </Typography>
+        </Box>
+        <Typography variant="subtitle1" sx={{ color: 'primary.main', fontWeight: 500, mt: 1 }}>
+          Discover, shop, and enjoy your next read
+        </Typography>
+      </Toolbar>
+    </AppBar>
   );
 }
 
 function Footer() {
   return (
-    <footer style={{
-      width: '100%',
-      background: 'linear-gradient(90deg, #f4f8fb 0%, #e0f7fa 100%)',
-      color: '#222',
-      padding: '2.5rem 0 1.5rem 0',
-      marginTop: '2rem',
-      borderTop: '1px solid #e0e0e0',
-      fontSize: '1.08rem',
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'center',
-      gap: '3rem',
-      flexWrap: 'wrap',
-      boxShadow: '0 -2px 12px rgba(0,120,212,0.04)',
-    }}>
-      <div style={{ minWidth: 220, textAlign: 'left' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12, fontWeight: 600, fontSize: '1.15rem', marginBottom: 8 }}>
-          <img src="/vite.svg" alt="Logo" style={{ width: 32, height: 32, borderRadius: '50%', boxShadow: '0 1px 4px #0078d4' }} />
-          <span>Daniele Sabia</span>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
-          <svg width="20" height="20" fill="#0078d4" style={{ marginRight: 4 }} viewBox="0 0 24 24"><path d="M12 12.713l11.985-8.713h-23.97zm0 2.574l-12-8.713v13.426h24v-13.426zm12-11.287v-.001c0-1.104-.896-2-2-2h-20c-1.104 0-2 .896-2 2v.001l12 8.713 12-8.713z"/></svg>
-          <a href="mailto:sabiasrl@outlook.com" style={{ color: '#0078d4', textDecoration: 'underline' }}>sabiasrl@outlook.com</a>
-        </div>
-      </div>
-      <div style={{ minWidth: 220, textAlign: 'left', display: 'flex', flexDirection: 'column', gap: 10 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <svg width="20" height="20" fill="#0078d4" style={{ marginRight: 4 }} viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-7 19h-3v-8h3v8zm-1.5-9.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 9.268c0 1.654-1.346 3-3 3h-14c-1.654 0-3-1.346-3-3v-14c0-1.654 1.346-3 3-3h14c1.654 0 3 1.346 3 3v14zm-6-1h-3v-4c0-1.104-.896-2-2-2s-2 .896-2 2v4h-3v-8h3v1.268c.591-.348 1.27-.568 2-.568s1.409.22 2 .568v-1.268h3v8z"/></svg>
-          <a href="https://www.linkedin.com/in/daniele-sabia" target="_blank" rel="noopener noreferrer" style={{ color: '#0078d4', textDecoration: 'underline' }}>
-            LinkedIn: daniele-sabia
-          </a>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <svg width="20" height="20" fill="#0078d4" style={{ marginRight: 4 }} viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8zm0-14a6 6 0 100 12 6 6 0 000-12zm0 10a4 4 0 110-8 4 4 0 010 8z"/></svg>
-          <a href="https://sabiasrl.com" target="_blank" rel="noopener noreferrer" style={{ color: '#0078d4', textDecoration: 'underline' }}>
-            Company: sabiasrl.com
-          </a>
-        </div>
-      </div>
-    </footer>
+    <Paper component="footer" square elevation={2} sx={{ mt: 6, py: 4, background: 'linear-gradient(90deg, #fff7e6 0%, #ffe0b2 100%)', color: 'secondary.main', borderTop: '1px solid #eee' }}>
+      <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'center', alignItems: 'center', gap: 6 }}>
+        <Box sx={{ minWidth: 220, textAlign: 'left' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, fontWeight: 600, fontSize: '1.15rem', mb: 1 }}>
+            <img src="/vite.svg" alt="Logo" style={{ width: 32, height: 32, borderRadius: '50%' }} />
+            <span>Daniele Sabia</span>
+          </Box>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+            <a href="mailto:sabiasrl@outlook.com" style={{ color: '#ff6f00', textDecoration: 'underline' }}>sabiasrl@outlook.com</a>
+          </Box>
+        </Box>
+        <Box sx={{ minWidth: 220, textAlign: 'left', display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+          <Box>
+            <a href="https://www.linkedin.com/in/daniele-sabia" target="_blank" rel="noopener noreferrer" style={{ color: '#ff6f00', textDecoration: 'underline' }}>
+              LinkedIn: daniele-sabia
+            </a>
+          </Box>
+          <Box>
+            <a href="https://sabiasrl.com" target="_blank" rel="noopener noreferrer" style={{ color: '#ff6f00', textDecoration: 'underline' }}>
+              Company: sabiasrl.com
+            </a>
+          </Box>
+        </Box>
+      </Box>
+    </Paper>
   );
 }
 
@@ -102,7 +159,7 @@ function AppContent() {
   return (
     <CartContext.Provider value={{ cartItems: cart, addToCart, updateQuantity, removeFromCart, clearCart }}>
       <Header />
-      <div className="main-card">
+      <Box sx={{ maxWidth: 1200, mx: 'auto', my: 4, p: { xs: 1, md: 3 }, minHeight: '70vh', bgcolor: 'background.default', borderRadius: 4 }}>
         <AuthButtons user={user} onLogout={handleLogout} />
         <Breadcrumbs />
         <Routes>
@@ -120,21 +177,25 @@ function AppContent() {
                 navigate('/');
                 alert('Order placed!');
               }}
+              onRemove={removeFromCart}
             />
           } />
           <Route path="/info" element={<InfoPage />} />
         </Routes>
-      </div>
+      </Box>
     </CartContext.Provider>
   );
 }
 
 function App() {
   return (
-    <Router>
-      <AppContent />
-      <Footer />
-    </Router>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Router>
+        <AppContent />
+        <Footer />
+      </Router>
+    </ThemeProvider>
   );
 }
 

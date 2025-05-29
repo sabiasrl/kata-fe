@@ -4,6 +4,8 @@ import Cart from '../components/Cart';
 import { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
 import { fetchBooks } from '../services/api';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 
 const ProductsHome = ({ onAddToCart, onUpdateQuantity, onRemove, navigate }) => {
   const { cartItems } = useContext(CartContext);
@@ -15,19 +17,19 @@ const ProductsHome = ({ onAddToCart, onUpdateQuantity, onRemove, navigate }) => 
   }, []);
 
   return (
-    <div className="flex-layout">
-      <div style={{ flex: 2 }}>
-        {loading ? <p>Loading books...</p> : <BookList books={books} onAddToCart={onAddToCart} />}
-      </div>
-      <div className="cart-summary" style={{ flex: 1, minWidth: 320, marginLeft: 24 }}>
+    <Box sx={{ display: 'flex', gap: 3, alignItems: 'flex-start', bgcolor: 'background.paper', borderRadius: 2, p: { xs: 1, md: 3 }, my: 4 }}>
+      <Box sx={{ flex: 2 }}>
+        {loading ? <span>Loading books...</span> : <BookList books={books} onAddToCart={onAddToCart} />}
+      </Box>
+      <Box sx={{ flex: 1, minWidth: 320 }}>
         <Cart cartItems={cartItems} onUpdateQuantity={onUpdateQuantity} onRemove={onRemove} />
         {cartItems.length > 0 && (
-          <button style={{ marginTop: '1rem', width: '100%' }} onClick={() => navigate('/checkout')}>
+          <Button variant="contained" color="primary" fullWidth onClick={() => navigate('/checkout')}>
             Proceed to Checkout
-          </button>
+          </Button>
         )}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 
