@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
@@ -6,9 +6,12 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Box from '@mui/material/Box';
+import { CartContext } from '../context/CartContext';
 
-const BookList = ({ books, onAddToCart }) => {
+const BookList = ({books}) => {
   const [search, setSearch] = useState('');
+  const { addToCart } = useContext(CartContext);
+
   const filteredBooks = books.filter(
     (book) =>
       book.title.toLowerCase().includes(search.toLowerCase()) ||
@@ -34,7 +37,7 @@ const BookList = ({ books, onAddToCart }) => {
               <Typography color="error.main">Price: ${book.price.toFixed(2)}</Typography>
             </CardContent>
             <CardActions>
-              <Button fullWidth variant="contained" color="primary" onClick={() => onAddToCart(book)}>
+              <Button fullWidth variant="contained" color="primary" onClick={() => addToCart(book)}>
                 Add to Cart
               </Button>
             </CardActions>

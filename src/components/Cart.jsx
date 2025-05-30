@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
@@ -8,6 +8,7 @@ import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 import Paper from '@mui/material/Paper';
+import { CartContext } from '../context/CartContext.jsx';
 
 function NumberInput({ value, onChange, min = 1 }) {
   return (
@@ -34,38 +35,41 @@ function NumberInput({ value, onChange, min = 1 }) {
   );
 }
 
-const Cart = ({ cartItems, onUpdateQuantity, onRemove }) => (
-  <Paper elevation={2} sx={{ p: 2, borderRadius: 3, bgcolor: 'background.paper' }}>
-    <Typography variant="h5" color="secondary.main" fontWeight={700} gutterBottom>Shopping Cart</Typography>
-    {cartItems.length === 0 ? (
-      <Typography color="text.secondary">Your cart is empty.</Typography>
-    ) : (
-      <List>
-        {cartItems.map((item) => (
-          <ListItem key={item.book.id} sx={{ mb: 2, p: 0, flexDirection: 'column', alignItems: 'flex-start', borderBottom: '1px solid #eee', '&:last-child': { borderBottom: 'none' } }}>
-            <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ width: '100%' }}>
-              <Stack>
-                <Typography fontWeight={600}>{item.book.title}</Typography>
-                <Typography variant="body2" color="text.secondary">by {item.book.author}</Typography>
-                <Typography variant="body2" color="primary.main">Price: ${item.book.price.toFixed(2)}</Typography>
+const Cart = () => {
+  const { cartItems, updateQuantity, removeFromCart } = useContext(CartContext);
+  return (
+    <Paper elevation={2} sx={{ p: 2, borderRadius: 3, bgcolor: 'background.paper' }}>
+      <Typography variant="h5" color="secondary.main" fontWeight={700} gutterBottom>Shopping Cart</Typography>
+      {cartItems.length === 0 ? (
+        <Typography color="text.secondary">Your cart is empty.</Typography>
+      ) : (
+        <List>
+          {cartItems.map((item) => (
+            <ListItem key={item.book.id} sx={{ mb: 2, p: 0, flexDirection: 'column', alignItems: 'flex-start', borderBottom: '1px solid #eee', '&:last-child': { borderBottom: 'none' } }}>
+              <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ width: '100%' }}>
+                <Stack>
+                  <Typography fontWeight={600}>{item.book.title}</Typography>
+                  <Typography variant="body2" color="text.secondary">by {item.book.author}</Typography>
+                  <Typography variant="body2" color="primary.main">Price: ${item.book.price.toFixed(2)}</Typography>
+                </Stack>
+                <IconButton size="medium" color="error" onClick={() => removeFromCart(item.book.id)} aria-label="Remove" sx={{ ml: 2 }}>
+                  <DeleteSweepIcon fontSize="medium" />
+                </IconButton>
               </Stack>
-              <IconButton size="medium" color="error" onClick={() => onRemove(item.book.id)} aria-label="Remove" sx={{ ml: 2 }}>
-                <DeleteSweepIcon fontSize="medium" />
-              </IconButton>
-            </Stack>
-            <Stack direction="row" alignItems="center" spacing={1} sx={{ mt: 1 }}>
-              <Typography variant="body2">Quantity:</Typography>
-              <NumberInput
-                value={item.quantity}
-                onChange={q => onUpdateQuantity(item.book.id, q)}
-                min={1}
-              />
-            </Stack>
-          </ListItem>
-        ))}
-      </List>
-    )}
-  </Paper>
-);
+              <Stack direction="row" alignItems="center" spacing={1} sx={{ mt: 1 }}>
+                <Typography variant="body2">Quantity:</Typography>
+                <NumberInput
+                  value={item.quantity}
+                  onChange={q => updateQuantity(item.book.id, q)}
+                  min={1}
+                />
+              </Stack>
+            </ListItem>
+          ))}
+        </List>
+      )}
+    </Paper>
+  );
+};
 
 export default Cart;

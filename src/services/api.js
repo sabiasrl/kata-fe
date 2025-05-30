@@ -1,7 +1,7 @@
 // src/services/api.js
 // API service layer for Online Bookstore frontend
 
-const API_BASE_URL = 'http://localhost:8080';
+import { API_BASE_URL } from '../config/config.js';
 
 export async function fetchBooks() {
   const response = await fetch(`${API_BASE_URL}/books`);
@@ -35,31 +35,54 @@ export async function register({ username, password }) {
   return response.json();
 }
 
-export async function fetchCart(token) {
-  const response = await fetch(`${API_BASE_URL}/cart`, {
-    headers: { Authorization: `Bearer ${token}` },
+// Cart: get by ID
+export async function fetchCart(cartId, authHeader) {
+  const response = await fetch(`${API_BASE_URL}/cart/${cartId}`, {
+    headers: { ...authHeader },
   });
   if (!response.ok) throw new Error('Failed to fetch cart');
   return response.json();
 }
 
-export async function addToCart(bookId, quantity, token) {
-  const response = await fetch(`${API_BASE_URL}/cart`, {
+// Cart: add book (POST /cart?bookId=...&quantity=...)
+export async function addToCart(bookId, quantity, authHeader) {
+  const url = `${API_BASE_URL}/cart?bookId=${bookId}&quantity=${quantity}`;
+  const response = await fetch(url, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify({ bookId, quantity }),
+    headers: { ...authHeader },
   });
   if (!response.ok) throw new Error('Failed to add to cart');
   return response.json();
 }
 
-export async function checkout(token) {
-  const response = await fetch(`${API_BASE_URL}/checkout`, {
+// Cart: update item (PUT /cart/{cartId}?bookId=...&quantity=...)
+export async function updateCartItem(cartId, bookId, quantity, authHeader) {
+  const url = `${API_BASE_URL}/cart/${cartId}?bookId=${bookId}&quantity=${quantity}`;
+  const response = await fetch(url, {
+    method: 'PUT',
+    headers: { ...authHeader },
+  });
+  if (!response.ok) throw new Error('Failed to update cart item');
+  return response.json();
+}
+
+// Cart: remove item (DELETE /cart/{cartId}?bookId=...)
+export async function removeCartItem(cartId, bookId, authHeader) {
+  const url = `${API_BASE_URL}/cart/${cartId}?bookId=${bookId}`;
+  const response = await fetch(url, {
+    method: 'DELETE',
+    headers: { ...authHeader },
+  });
+  if (!response.ok) throw new Error('Failed to remove cart item');
+  return response.json();
+}
+
+// Checkout: POST /order/checkout?cartId=...
+export async function checkout(cartId, authHeader) {
+  const url = `${API_BASE_URL}/order/checkout?cartId=${cartId}`;
+  const response = await fetch(url, {
     method: 'POST',
-    headers: { Authorization: `Bearer ${token}` },
+    headers: { ...authHeader },
   });
   if (!response.ok) throw new Error('Checkout failed');
   return response.json();

@@ -13,9 +13,9 @@ const HomePage = () => (
     <Typography variant="h4" color="secondary.main" fontWeight={700} gutterBottom>Welcome to Kata Online Bookstore</Typography>
     <Typography color="text.secondary" gutterBottom>Follow these steps to experience the bookstore:</Typography>
     <List>
-      <ListItem>Step 1: <LinkMUI component={Link} to="/register" color="primary.main">Register the user</LinkMUI></ListItem>
-      <ListItem>Step 2: <LinkMUI component={Link} to="/login" color="primary.main">Login</LinkMUI></ListItem>
-      <ListItem>Step 3: After successful login, go to <LinkMUI component={Link} to="/products" color="primary.main">Products</LinkMUI></ListItem>
+      <ListItem>Step 1:&nbsp;<LinkMUI component={Link} to="/register" color="primary.main">Register the user</LinkMUI></ListItem>
+      <ListItem>Step 2:&nbsp;<LinkMUI component={Link} to="/login" color="primary.main">Login</LinkMUI></ListItem>
+      <ListItem>Step 3: After successful login, go to&nbsp;<LinkMUI component={Link} to="/products" color="primary.main">Products</LinkMUI></ListItem>
       <ListItem>Step 4: Add books to the cart</ListItem>
       <ListItem>Step 5: Checkout</ListItem>
     </List>

@@ -1,16 +1,15 @@
-import React, { useReducer, useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
-import { CartContext, cartReducer } from './context/CartContext';
+import { UserProvider } from './context/UserContext.jsx';
+import { CartProvider } from './context/CartContext.jsx';
 import Breadcrumbs from './components/Breadcrumbs';
 import LoginPage from './pages/LoginPage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
 import AuthButtons from './components/AuthButtons';
 import HomePage from './pages/HomePage.jsx';
-import BookList from './components/BookList';
-import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import InfoPage from './pages/InfoPage.jsx';
-import ProductsHome from './pages/ProductsHome.jsx';
+import ProductsPage from './pages/ProductsPage.jsx';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -106,7 +105,7 @@ function Header() {
             Kata Online Bookstore
           </Typography>
         </Box>
-        <Typography variant="subtitle1" sx={{ color: 'primary.main', fontWeight: 500, mt: 1 }}>
+        <Typography variant="subtitle1" sx={{ color: 'secondary.main', fontWeight: 500, mt: 1 }}>
           Discover, shop, and enjoy your next read
         </Typography>
       </Toolbar>
@@ -145,45 +144,25 @@ function Footer() {
 }
 
 function AppContent() {
-  const [cart, dispatch] = useReducer(cartReducer, []);
-  const [user, setUser] = useState(null);
   const navigate = useNavigate();
-
-
-  const addToCart = (book) => dispatch({ type: 'ADD_TO_CART', book });
-  const updateQuantity = (bookId, quantity) => dispatch({ type: 'UPDATE_QUANTITY', bookId, quantity });
-  const removeFromCart = (bookId) => dispatch({ type: 'REMOVE_FROM_CART', bookId });
-  const clearCart = () => dispatch({ type: 'CLEAR_CART' });
-  const handleLogout = () => setUser(null);
-
   return (
-    <CartContext.Provider value={{ cartItems: cart, addToCart, updateQuantity, removeFromCart, clearCart }}>
-      <Header />
-      <Box sx={{ maxWidth: 1200, mx: 'auto', my: 4, p: { xs: 1, md: 3 }, minHeight: '70vh', bgcolor: 'background.default', borderRadius: 4 }}>
-        <AuthButtons user={user} onLogout={handleLogout} />
-        <Breadcrumbs />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/products" element={
-            <ProductsHome onAddToCart={addToCart} onUpdateQuantity={updateQuantity} onRemove={removeFromCart} navigate={navigate}/>
-          } />
-          <Route path="/products/checkout" element={
-            <Checkout
-              cartItems={cart}
-              onCheckout={() => {
-                clearCart();
-                navigate('/');
-                alert('Order placed!');
-              }}
-              onRemove={removeFromCart}
-            />
-          } />
-          <Route path="/info" element={<InfoPage />} />
-        </Routes>
-      </Box>
-    </CartContext.Provider>
+    <UserProvider>
+      <CartProvider>
+        <Header />
+        <Box sx={{ maxWidth: 1200, mx: 'auto', my: 4, p: { xs: 1, md: 3 }, minHeight: '70vh', bgcolor: 'background.default', borderRadius: 4 }}>
+          <AuthButtons />
+          <Breadcrumbs />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/products" element={<ProductsPage navigate={navigate}/>} />
+            <Route path="/products/checkout" element={<Checkout />} />
+            <Route path="/info" element={<InfoPage />} />
+          </Routes>
+        </Box>
+      </CartProvider>
+    </UserProvider>
   );
 }
 
