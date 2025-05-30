@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { login } from '../services/api';
+import { UserContext } from '../context/UserContext.jsx';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
@@ -13,14 +13,15 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { login } = useContext(UserContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    try {
-      await login({ username, password });
+    const success = await login(username, password);
+    if (success) {
       navigate('/products');
-    } catch {
+    } else {
       setError('Invalid credentials');
     }
   };

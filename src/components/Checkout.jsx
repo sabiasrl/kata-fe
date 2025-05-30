@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
@@ -7,8 +7,10 @@ import ListItem from '@mui/material/ListItem';
 import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import { CartContext } from '../context/CartContext.jsx';
 
-const Checkout = ({ cartItems, onCheckout, onRemove }) => {
+const Checkout = () => {
+  const { cartItems, checkout, removeFromCart } = useContext(CartContext);
   const total = cartItems.reduce(
     (sum, item) => sum + item.book.price * item.quantity,
     0
@@ -32,11 +34,9 @@ const Checkout = ({ cartItems, onCheckout, onRemove }) => {
                   <Typography color="primary.main" fontWeight={600}>
                     ${(item.book.price * item.quantity).toFixed(2)}
                   </Typography>
-                  {onRemove && (
-                    <IconButton size="small" color="error" onClick={() => onRemove(item.book.id)} aria-label="Remove">
-                      <DeleteOutlineIcon />
-                    </IconButton>
-                  )}
+                  <IconButton size="small" color="error" onClick={() => removeFromCart(item.book.id)} aria-label="Remove">
+                    <DeleteOutlineIcon />
+                  </IconButton>
                 </Stack>
               </ListItem>
             ))}
@@ -45,7 +45,7 @@ const Checkout = ({ cartItems, onCheckout, onRemove }) => {
             <Typography variant="h6">Total:</Typography>
             <Typography variant="h6" color="error.main">${total.toFixed(2)}</Typography>
           </Stack>
-          <Button fullWidth variant="contained" color="primary" size="large" onClick={onCheckout} sx={{ fontWeight: 700 }}>
+          <Button fullWidth variant="contained" color="primary" size="large" onClick={checkout} sx={{ fontWeight: 700 }}>
             Place Order
           </Button>
         </>
