@@ -22,10 +22,10 @@ const theme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#ff6f00', // Amazon orange
+      main: '#ff6f00', 
     },
     secondary: {
-      main: '#232f3e', // Amazon dark blue
+      main: '#232f3e', 
     },
     background: {
       default: '#f3f3f3',
@@ -138,6 +138,9 @@ function Footer() {
             </a>
           </Box>
         </Box>
+      </Box>
+      <Box sx={{ mt: 3, textAlign: 'center', fontWeight: 500, fontSize: '1rem' }}>
+        © 2025 Sabia SRL. All rights reserved.
       </Box>
     </Paper>
   );
