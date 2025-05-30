@@ -7,7 +7,7 @@ import LoginPage from './pages/LoginPage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
 import AuthButtons from './components/AuthButtons';
 import HomePage from './pages/HomePage.jsx';
-import Checkout from './components/Checkout';
+import CheckoutPage from './pages/CheckoutPage.jsx';
 import InfoPage from './pages/InfoPage.jsx';
 import ProductsPage from './pages/ProductsPage.jsx';
 import AppBar from '@mui/material/AppBar';
@@ -161,7 +161,7 @@ function AppContent() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/products" element={<ProductsPage navigate={navigate}/>} />
-            <Route path="/products/checkout" element={<Checkout />} />
+            <Route path="/products/checkout" element={<CheckoutPage />} />
             <Route path="/info" element={<InfoPage />} />
           </Routes>
         </Box>

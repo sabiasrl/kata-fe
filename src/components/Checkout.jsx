@@ -17,7 +17,7 @@ const Checkout = () => {
   );
 
   return (
-    <Paper elevation={3} sx={{ maxWidth: 600, mx: 'auto', p: 3, borderRadius: 3, bgcolor: 'background.paper' }}>
+    <Paper elevation={3} sx={{ mx: 'auto', p: 3, borderRadius: 3, bgcolor: 'background.paper' }}>
       <Typography variant="h5" align="center" color="secondary.main" fontWeight={700} gutterBottom>Checkout</Typography>
       {cartItems.length === 0 ? (
         <Typography align="center" color="text.secondary">Your cart is empty.</Typography>
