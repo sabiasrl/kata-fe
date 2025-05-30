@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { parseMarkdown } from '../utils/markdown.jsx';
+import ReactMarkdown from 'react-markdown';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography';
@@ -23,7 +23,7 @@ const InfoPage = () => {
           <Typography sx={{ ml: 2 }}>Loading...</Typography>
         </Box>
       ) : (
-        parseMarkdown(markdown)
+        <ReactMarkdown>{markdown}</ReactMarkdown>
       )}
     </Box>
   );
