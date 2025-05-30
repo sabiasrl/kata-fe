@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
@@ -10,7 +11,9 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { CartContext } from '../context/CartContext.jsx';
 
 const Checkout = () => {
+  const navigate = useNavigate();
   const { cartItems, checkout, removeFromCart } = useContext(CartContext);
+  
   const total = cartItems.reduce(
     (sum, item) => sum + item.book.price * item.quantity,
     0
@@ -45,7 +48,11 @@ const Checkout = () => {
             <Typography variant="h6">Total:</Typography>
             <Typography variant="h6" color="error.main">${total.toFixed(2)}</Typography>
           </Stack>
-          <Button fullWidth variant="contained" color="primary" size="large" onClick={checkout} sx={{ fontWeight: 700 }}>
+          <Button fullWidth variant="contained" color="primary" size="large" onClick={() => {
+            checkout();
+            alert('Thank you for your order!'); // Simple alert for demo purposes
+            navigate('/products'); // Redirect to products page after checkout
+          }} sx={{ fontWeight: 700 }}>
             Place Order
           </Button>
         </>

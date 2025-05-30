@@ -1,6 +1,5 @@
 import {
   fetchBooks,
-  fetchBook,
   login,
   register,
   fetchCart,
@@ -12,7 +11,8 @@ import {
 
 // Mock fetch globally
 beforeEach(() => {
-  global.fetch = jest.fn();
+  // Use window.fetch for browser environment
+  window.fetch = jest.fn();
 });
 afterEach(() => {
   jest.resetAllMocks();

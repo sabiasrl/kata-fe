@@ -9,12 +9,6 @@ export async function fetchBooks() {
   return response.json();
 }
 
-export async function fetchBook(id) {
-  const response = await fetch(`${API_BASE_URL}/books/${id}`);
-  if (!response.ok) throw new Error('Failed to fetch book');
-  return response.json();
-}
-
 export async function login({ username, password }) {
   const response = await fetch(`${API_BASE_URL}/auth/login`, {
     method: 'POST',
