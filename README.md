@@ -1,4 +1,4 @@
-# Online Bookstore Frontend (React)
+# KATA - Online Bookstore - Frontend (React)
 
 This is the frontend for the Online Bookstore project, built with React and Vite.
 
@@ -23,13 +23,8 @@ npm install
 ```bash
 npm run dev
 ```
-The app will be available at `http://localhost:3000` (default Vite port).
-
-### Run Tests
-```bash
-npm test
-```
+The app will be available at `http://localhost:3000`.
 
 ### API Integration
 - The frontend expects the backend API to be running at `http://localhost:8080`.
-- Update API URLs in the code if your backend runs elsewhere.
+
