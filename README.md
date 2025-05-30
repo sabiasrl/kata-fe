@@ -25,11 +25,15 @@ npm run dev
 ```
 The app will be available at `http://localhost:3000` (default Vite port).
 
-### Run Tests
+
+### Test Coverage
 ```bash
-npm test
+npm test -- --coverage
 ```
+Generates a coverage report in the `coverage/` directory. Open `coverage/lcov-report/index.html` in your browser to view detailed coverage.
+
 
 ### API Integration
 - The frontend expects the backend API to be running at `http://localhost:8080`.
-- Update API URLs in the code if your backend runs elsewhere.
+
+--
