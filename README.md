@@ -25,6 +25,15 @@ npm run dev
 ```
 The app will be available at `http://localhost:3000`.
 
+### Test and Coverage
+```bash
+npm test --
+
+npm test -- --coverage
+```
+Open `coverage/lcov-report/index.html` in your browser to view detailed coverage.
+
+
 ### API Integration
 - The frontend expects the backend API to be running at `http://localhost:8080`.
 
@@ -34,3 +43,4 @@ The app will be available at `http://localhost:3000`.
 
 Proprietary. Copyright © 2025 Sabia Srl. All rights reserved.
 Unauthorized use is prohibited.
+
